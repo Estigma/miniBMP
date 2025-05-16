@@ -25,3 +25,73 @@ replay_pid*
 
 # Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
 .kotlin/
+
+# Archivos de compilación
+/build/
+/app/build/
+/.gradle/
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/.name
+.idea/compiler.xml
+
+# Archivos del sistema operativo
+*.iml
+*.hprof
+*.log
+*.swp
+*.lock
+*.DS_Store
+*.apk
+*.ap_
+
+# Gradle
+.gradle
+/local.properties
+/.gradle
+/captures/
+/output.json
+
+# Archivos de firma
+*.jks
+*.keystore
+*.pem
+
+# Archivos generados por Android Studio
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# Firebase
+/google-services.json
+/google-services.plist
+/firebase.json
+.crashlytics/
+
+# Test result logs
+test-results/
+androidTest-results/
+
+# Node modules (en caso de usar Firebase Hosting con funciones o frontend JS)
+functions/node_modules/
+
+# Otros archivos sensibles o innecesarios
+*.env
+.env.*
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# IntelliJ IDEA
+.idea/
+
+# Configuración de VSC (si se usa)
+.vscode/

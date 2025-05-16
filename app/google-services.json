@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "735783075769",
+    "project_id": "ups-minibmp",
+    "storage_bucket": "ups-minibmp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735783075769:android:fa23605f8c6b331a974068",
+        "android_client_info": {
+          "package_name": "com.ups.miniBMP"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmP4E6F3VfyAt3EhhGTFJRSWjo3G_aQKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735783075769:android:58f5c8d0daf3473a974068",
+        "android_client_info": {
+          "package_name": "com.ups.minibmp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmP4E6F3VfyAt3EhhGTFJRSWjo3G_aQKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
