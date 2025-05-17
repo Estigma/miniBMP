@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ups.minibmp.services.AuthRepository
 import com.ups.minibmp.services.TransferRepository
+import com.ups.minibmp.utils.KeyChainAuthManager
 import com.ups.minibmp.utils.SecureDataStorage
 import dagger.Module
 import dagger.Provides
@@ -43,9 +44,9 @@ object AppModule {
     @Singleton
     fun provideAuthRepository(
         firebaseAuth: FirebaseAuth,
-        secureStorage: SecureDataStorage
+        keyChainManager: KeyChainAuthManager
     ): AuthRepository {
-        return AuthRepository(firebaseAuth, secureStorage)
+        return AuthRepository(firebaseAuth, keyChainManager)
     }
 
     // Opcional: Si usas EncryptedSharedPreferences directamente
@@ -63,5 +64,17 @@ object AppModule {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         ) as EncryptedSharedPreferences
+    }
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object AuthModule {
+        @Provides
+        @Singleton
+        fun provideKeyChainAuthManager(
+            @ApplicationContext context: Context
+        ): KeyChainAuthManager {
+            return KeyChainAuthManager(context)
+        }
     }
 }

@@ -91,7 +91,9 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.biometric)
 
+    implementation(libs.google.code.gson)
     implementation(libs.play.services.auth)
     implementation(libs.androidx.work.runtime.ktx)
 }

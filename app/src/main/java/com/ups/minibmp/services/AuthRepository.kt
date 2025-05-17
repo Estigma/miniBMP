@@ -2,20 +2,20 @@ package com.ups.minibmp.services
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.ups.minibmp.utils.SecureDataStorage
+import com.ups.minibmp.utils.KeyChainAuthManager
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AuthRepository @Inject constructor(
     private val auth: FirebaseAuth,
-    private val secureStorage: SecureDataStorage
+    private val keyChainManager: KeyChainAuthManager
 ) {
     suspend fun login(email: String, password: String): Boolean {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()
-            secureStorage.saveCredentials(email, password, "") // Token vacío inicial
+            keyChainManager.setTempCredentials(email, password)
             true
         } catch (e: Exception) {
             false
@@ -23,32 +23,27 @@ class AuthRepository @Inject constructor(
     }
 
     suspend fun loginWithToken(token: String): Boolean {
-        val (email, password, savedToken) = secureStorage.getCredentials()
-        return if (!email.isNullOrEmpty() && !password.isNullOrEmpty() && token == savedToken) {
-            auth.signInWithEmailAndPassword(email, password).await()
+        val credentials = keyChainManager.getCredentialsByToken(token) ?: return false
+        return try {
+            auth.signInWithEmailAndPassword(credentials.first, credentials.second).await()
             true
-        } else {
+        } catch (e: Exception) {
             false
         }
     }
 
     suspend fun setupToken(token: String): Boolean {
-        val (email, password, _) = secureStorage.getCredentials()
-        return if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-            secureStorage.saveCredentials(email, password, token)
-            true
-        } else {
-            false
-        }
+        return keyChainManager.saveCredentialsWithToken(token)
     }
 
-    suspend fun hasToken(): Boolean {
-        val (_, _, token) = secureStorage.getCredentials()
-        return !token.isNullOrEmpty()
+    fun hasToken(): Boolean {
+        return keyChainManager.hasToken()
     }
 
-    fun isLoggedIn(): Boolean = auth.currentUser != null
     fun getCurrentUser(): FirebaseUser? = auth.currentUser
-    fun logout() = auth.signOut()
 
+    fun logout() {
+        auth.signOut()
+        // No limpiamos KeyChain según requisitos
+    }
 }

@@ -3,6 +3,7 @@ package com.ups.minibmp.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ups.minibmp.services.AuthRepository
+import com.ups.minibmp.utils.KeyChainAuthManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val authRepo: AuthRepository
+    private val authRepo: AuthRepository,
+    private val keyChainManager: KeyChainAuthManager
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<AuthUiState>(AuthUiState.Idle)
     val uiState: StateFlow<AuthUiState> = _uiState
@@ -44,7 +46,7 @@ class AuthViewModel @Inject constructor(
     fun setupToken(token: String) {
         _uiState.value = AuthUiState.Loading
         viewModelScope.launch {
-            val success = authRepo.setupToken(token)
+            val success = keyChainManager.saveCredentialsWithToken(token)
             _uiState.value = if (success) {
                 AuthUiState.Success(needsTokenSetup = false)
             } else {
