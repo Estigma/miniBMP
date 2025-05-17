@@ -37,6 +37,12 @@ fun LoginScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
+        Text(
+            text = "Bienvenido a MiniBMP",
+            style = MaterialTheme.typography.displayLarge)
+        Spacer(modifier = Modifier.height(64.dp))
+        Text("Ingresa tus credenciales")
+        Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },

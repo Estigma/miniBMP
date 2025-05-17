@@ -101,6 +101,18 @@ fun TokenSetupScreen(
                     Text("Guardar Token")
                 }
             }
+            Spacer(modifier = Modifier.height(32.dp))
+            Button(
+                onClick = {
+                    viewModel.noSetupToken()
+                }
+            ) {
+                if (uiState is AuthViewModel.AuthUiState.Loading) {
+                    CircularProgressIndicator(color = Color.White)
+                } else {
+                    Text("Continuar sin Token")
+                }
+            }
 
             when (uiState) {
                 is AuthViewModel.AuthUiState.Success -> {

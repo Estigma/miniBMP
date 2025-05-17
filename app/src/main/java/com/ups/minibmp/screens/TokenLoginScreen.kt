@@ -9,10 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import com.ups.minibmp.viewModels.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,7 +56,8 @@ fun TokenLoginScreen(
                 value = tokenState.value,
                 onValueChange = { if (it.length <= 6) tokenState.value = it },
                 label = { Text("Token de 6 dígitos") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                visualTransformation = PasswordVisualTransformation()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
