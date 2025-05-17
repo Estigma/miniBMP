@@ -53,6 +53,13 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun logout() {
+        viewModelScope.launch {
+            authRepo.logout()
+            _uiState.value = AuthUiState.Idle // Reinicia el estado
+        }
+    }
+
     fun noSetupToken() {
         _uiState.value = AuthUiState.Success(needsTokenSetup = false)
     }
