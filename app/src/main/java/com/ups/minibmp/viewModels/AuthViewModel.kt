@@ -53,6 +53,10 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun noSetupToken() {
+        _uiState.value = AuthUiState.Success(needsTokenSetup = false)
+    }
+
     fun setError(message: String) {
         _uiState.value = AuthUiState.Error(message)
     }
