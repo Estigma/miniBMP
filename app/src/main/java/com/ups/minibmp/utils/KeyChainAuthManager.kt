@@ -31,7 +31,7 @@ class KeyChainAuthManager @Inject constructor(context: Context) {
             .putString("password", credentials.second)
             .putString("token", token)
             .putBoolean("has_token", true)
-            .apply() // Usamos apply() en lugar de commit() para operación asíncrona
+            .apply()
         tempCredentials = null
         return true
     }
@@ -50,13 +50,5 @@ class KeyChainAuthManager @Inject constructor(context: Context) {
 
     fun hasToken(): Boolean {
         return secureStorage.getBoolean("has_token", false)
-    }
-
-    fun clearTempCredentials() {
-        tempCredentials = null
-    }
-
-    fun clearSession() {
-        tempCredentials = null
     }
 }

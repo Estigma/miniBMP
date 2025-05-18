@@ -32,10 +32,6 @@ class AuthRepository @Inject constructor(
         }
     }
 
-    suspend fun setupToken(token: String): Boolean {
-        return keyChainManager.saveCredentialsWithToken(token)
-    }
-
     fun hasToken(): Boolean {
         return keyChainManager.hasToken()
     }
@@ -44,6 +40,5 @@ class AuthRepository @Inject constructor(
 
     fun logout() {
         auth.signOut()
-        // No limpiamos KeyChain según requisitos
     }
 }

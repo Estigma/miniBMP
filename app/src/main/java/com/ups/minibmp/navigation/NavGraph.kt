@@ -82,7 +82,7 @@ fun NavGraphBuilder.mainAppGraph(navController: NavHostController) {
         composable("accounts") {
             MainAppScreen(
                 currentScreen = "accounts",
-                onAccountsClick = { /* Ya estamos aquí */ },
+                onAccountsClick = {  },
                 onTransactionsClick = {
                     navController.navigate("transactions") {
                         launchSingleTop = true
@@ -109,7 +109,7 @@ fun NavGraphBuilder.mainAppGraph(navController: NavHostController) {
                         restoreState = true
                     }
                 },
-                onTransactionsClick = { /* Ya estamos aquí */ },
+                onTransactionsClick = {  },
                 onTransferClick = {
                     navController.navigate("transfer") {
                         launchSingleTop = true
